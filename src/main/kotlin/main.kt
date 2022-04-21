@@ -13,6 +13,8 @@ println(numdesc)
     println(f.balance)
     f.detail()
     println(f.withdraw(300.0))
+    var saving=SavingAccount("346ed","dalllen",200.0,2)
+    saving.withdraws(200.0)
 }
 
 open class CurrentAccount(var accountnumber:String, var accountname:String, var balance:Double){
@@ -20,11 +22,11 @@ open class CurrentAccount(var accountnumber:String, var accountname:String, var 
         balance+=amount
         return balance
     }
-    fun withdraw(amount:Double):Double{
+    open fun withdraw(amount:Double):Double{
         balance-=amount
         return balance
     }
-    fun detail(){
+    open fun detail(){
         println("Acountnumber $accountnumber with balance $balance is operated by $accountname" )
     }
     open fun withdraws(amount: Double){
@@ -34,13 +36,16 @@ open class CurrentAccount(var accountnumber:String, var accountname:String, var 
 
 }
 class SavingAccount(accountnumber: String,accountname: String,balance: Double,var withdraws:Int):CurrentAccount(accountnumber,accountnumber,balance){
-    fun withdraw(){
+    override fun withdraws(amount: Double){
+        super.withdraw(amount)
         if (withdraws< 4){
+            withdraws++
             println("can withdraw")
 
         }else{
-            println(withdraws++)
+            println("not allowed to withdraw")
     }
 }
 }
+
 
